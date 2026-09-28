@@ -1,9 +1,10 @@
-import time
 import json
-import random
-import requests
-from kafka import KafkaProducer
 import os
+import random
+import time
+from kafka import KafkaProducer
+import requests
+
 KAFKA_HOST = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
 
 producer = KafkaProducer(
@@ -13,18 +14,7 @@ producer = KafkaProducer(
 )
 
 # 1. Configuración de Zona (Bounding Box: España / Portugal)
-BOUNDING_BOX = {
-    "lamin": 35.0,
-    "lomin": -10.0,
-    "lamax": 44.0,
-    "lomax": 4.5
-}
-
-producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
-    value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-    key_serializer=lambda k: k.encode('utf-8')
-)
+BOUNDING_BOX = {"lamin": 35.0, "lomin": -10.0, "lamax": 44.0, "lomax": 4.5}
 
 URL = "https://opensky-network.org/api/states/all"
 
